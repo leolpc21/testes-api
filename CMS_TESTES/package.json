@@ -1,0 +1,9 @@
+{
+  "name": "cms-testes-api",
+  "version": "1.0.0",
+  "description": "Testes de API de Gestão de Conteúdo",
+  "main": "",
+  "devDependencies": {
+    "cypress": "^14.3.3"
+  }
+}
