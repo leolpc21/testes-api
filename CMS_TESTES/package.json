@@ -3,7 +3,22 @@
   "version": "1.0.0",
   "description": "Testes de API de Gestão de Conteúdo",
   "main": "",
+  "scripts": {
+    "lint": "eslint . --ext .js,.ts",
+    "prepare": "husky install",
+    "lint:fix": "eslint . --fix",
+    "lint-staged-script": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix"
+    ]
+  },
   "devDependencies": {
-    "cypress": "^14.3.3"
+    "cypress": "^14.3.3",
+    "eslint": "^9.24.0",
+    "eslint-plugin-cypress": "^4.2.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.0"
   }
 }
