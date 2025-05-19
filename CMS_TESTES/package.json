@@ -3,11 +3,26 @@
   "version": "1.0.0",
   "description": "Testes de API de Gestão de Conteúdo",
   "main": "",
+  "scripts": {
+    "lint": "eslint . --ext .js,.ts",
+    "prepare": "husky install",
+    "lint:fix": "eslint . --fix",
+    "lint-staged-script": "lint-staged"
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix"
+    ]
+  },
   "devDependencies": {
     "@faker-js/faker": "^9.8.0",
     "chai-json-schema": "^1.5.1",
     "chai-json-schema-ajv": "^5.2.4",
     "cypress": "^14.3.3",
-    "cypress-plugin-api": "^2.11.2"
+    "cypress-plugin-api": "^2.11.2",
+    "eslint": "^9.24.0",
+    "eslint-plugin-cypress": "^4.2.0",
+    "husky": "^9.1.7",
+    "lint-staged": "^15.5.0"
   }
 }
