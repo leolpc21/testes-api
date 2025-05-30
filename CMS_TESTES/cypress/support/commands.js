@@ -23,3 +23,14 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+
+Cypress.Commands.overwrite('api', (originalFn, ...options) => {
+  if (options.length == 1) {
+    options[0].headers = {
+      authorization: `Bearer ${Cypress.env('token')}`,
+      ...options[0].headers,
+    };
+  }
+
+  return originalFn(...options);
+});
