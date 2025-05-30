@@ -16,3 +16,14 @@
 // Import commands.js using ES2015 syntax:
 import 'cypress-plugin-api';
 import './commands';
+import './commands/autenticacao';
+
+before(() => {
+  cy.login('valid').as('auth');
+
+  cy.get('@auth').then(({ status, body}) => {
+    expect(status).to.equal(200);
+    expect(body).to.have.property('token');
+    Cypress.env('token', body.token);
+  });
+});
