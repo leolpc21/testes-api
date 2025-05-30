@@ -7,7 +7,9 @@
     "lint": "eslint . --ext .js,.ts",
     "prepare": "husky install",
     "lint:fix": "eslint . --fix",
-    "lint-staged-script": "lint-staged"
+    "lint-staged-script": "lint-staged",
+    "test:open": "cypress open",
+    "test:run": "cypress run"
   },
   "lint-staged": {
     "*.js": [
