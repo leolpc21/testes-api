@@ -22,6 +22,31 @@ class RandomDataGenerator {
     case 'required': return {};
     }
   }
+
+  static getCategory(login_type) {
+    switch (login_type) {
+    case 'valid':
+      return {
+        'nome': `${faker.book.genre()} ${faker.string.uuid(10)}`,
+        'descricao': faker.book.title(),
+      };
+    case 'empty':
+      return {
+        'nome': '',
+        'descricao': ''
+      };
+    case 'duplicate':
+      return {
+        'nome': 'Tecnologia',
+        'descricao': 'Artigos sobre tecnologia'
+      };
+    case 'required': return {};
+    }
+  }
+
+  static getUUID() {
+    return faker.string.uuid();
+  }
 }
 
 export default RandomDataGenerator;
