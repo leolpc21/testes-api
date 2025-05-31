@@ -17,6 +17,7 @@
 import 'cypress-plugin-api';
 import './commands';
 import './commands/autenticacao';
+import './commands/categorias';
 
 before(() => {
   cy.login('valid').as('auth');
