@@ -17,11 +17,17 @@
 import 'cypress-plugin-api';
 import './commands';
 import './commands/autenticacao';
+import './commands/usuarios';
+chai.use(require('chai-json-schema'));
+import { RandomDataGenerator } from './helpers/data/randomDataGenerator.js';
 
 before(() => {
+  const { user } = RandomDataGenerator.getRandomUser();
+
+  cy.criarNovoUsuario(user).as('newUser');
   cy.login('valid').as('auth');
 
-  cy.get('@auth').then(({ status, body}) => {
+  cy.get('@auth').then(({ status, body }) => {
     expect(status).to.equal(200);
     expect(body).to.have.property('token');
     Cypress.env('token', body.token);
