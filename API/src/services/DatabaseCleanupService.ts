@@ -30,7 +30,7 @@ export class DatabaseCleanupService implements EntitySubscriberInterface {
 
             const registrosAntigos = await repository
                 .createQueryBuilder()
-                .orderBy("'User'.'data_criacao'", "ASC")
+                .orderBy("data_criacao", "ASC")
                 .take(DatabaseCleanupService.REGISTROS_PARA_REMOVER)
                 .getMany();
 
