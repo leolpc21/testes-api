@@ -27,10 +27,10 @@ export class DatabaseCleanupService implements EntitySubscriberInterface {
     private async limparRegistrosAntigos(entity: any, tableName: string): Promise<void> {
         try {
             const repository = AppDataSource.getRepository(entity);
-            
+
             const registrosAntigos = await repository
                 .createQueryBuilder()
-                .orderBy("COALESCE(created_at, data_registro)", "ASC")
+                .orderBy("data_criacao", "ASC")
                 .take(DatabaseCleanupService.REGISTROS_PARA_REMOVER)
                 .getMany();
 
@@ -45,16 +45,16 @@ export class DatabaseCleanupService implements EntitySubscriberInterface {
 
     async verificarEstadoAtual(): Promise<void> {
         const entities = AppDataSource.entityMetadatas;
-        
+
         for (const entity of entities) {
             try {
                 const repository = AppDataSource.getRepository(entity.target);
                 const count = await repository.count();
-                
+
                 if (count >= DatabaseCleanupService.LIMITE_REGISTROS) {
                     await this.limparRegistrosAntigos(entity.target, entity.tableName);
                 }
-                
+
                 this.tableCounters.set(entity.tableName, count % DatabaseCleanupService.LIMITE_REGISTROS);
             } catch (error) {
                 console.error(`[Limpeza Automática] Erro ao verificar tabela ${entity.tableName}:`, error);
