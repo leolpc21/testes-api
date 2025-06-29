@@ -6,7 +6,7 @@ class RandomDataGenerator {
     switch (login_type) {
     case 'valid':
       return {
-        'email':env.AUTH_USER_KEY,
+        'email': env.AUTH_USER_KEY,
         'senha': env.AUTH_USER_SECRET,
       };
     case 'empty':
@@ -22,6 +22,25 @@ class RandomDataGenerator {
     case 'required': return {};
     }
   }
+
+  static getRandomUser() {
+    const fullName = faker.person.fullName();
+    const userName = faker.internet.username({ firstName: fullName });
+    const user = {
+      nomeCompleto: fullName,
+      nomeUsuario: userName,
+      email: `${userName}@email.com`,
+      senha: '1234Qwer',
+    };
+    return { user };
+  }
+
+  static generateTimestamp() {
+    const now = new Date();
+    return now.toISOString().slice(0, 10);
+  }
 }
 
-export default RandomDataGenerator;
+module.exports = {
+  RandomDataGenerator
+};
